@@ -1,0 +1,23 @@
+1.
+
+    client                  server
+
+sends (username, pass) -----> verify and send some data back
+
+    save that data <---------- some verifying data
+
+request private data (with saved verifying data) ---> verify and give access
+
+
+2.
+
+    server can send Cookie or Token as verifying data to client
+
+3.
+Cookie work well with one Domain and sub domain
+Tokens work well with Multi Domain and sub domain
+
+
+
+
+
