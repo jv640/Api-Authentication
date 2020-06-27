@@ -1,11 +1,20 @@
 const mongoose = require('mongoose');
 const { schemas } = require('../helpers/routehelpers');
+const { string } = require('@hapi/joi');
 const Schema = mongoose.Schema;
 
 // create a schema
 const userSchema = new Schema({
-    email: String,
-    password: String
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase:true
+    },
+    password: {
+        type: String,
+        required:true
+    }
 });
 
 // create a model
