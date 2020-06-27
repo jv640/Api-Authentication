@@ -1,5 +1,15 @@
+const JWT = require('jsonwebtoken');
 const User = require("../models/user");
+const { JWT_SECRET } = require('../config');
 
+signToken = user => {       // fucntion to generate token
+    return JWT.sign({
+        iss: 'learningApi',     //issuer
+        sub: user.id,           // subject by which we are encoding (try something wch doesnt change with time)
+        iat: new Date().getTime(),
+        exp: new Date().setDate(new Date().getDate() + 1)
+    }, JWT_SECRET);
+}
 module.exports = {
     signUp : async (req, res , next) => {
         const { email, password } = req.value.body;
@@ -12,7 +22,10 @@ module.exports = {
         const newUser = new User({ email, password });
         await newUser.save();
 
-        res.json({ user : 'created'});
+        //Generating Token for user
+        const token = signToken(newUser);
+        // responding with token
+        res.status(200).json({token});
     },
     signIn : async (req, res , next) => {
 
