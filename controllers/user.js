@@ -31,6 +31,7 @@ module.exports = {
 
     },
     secret : async (req, res , next) => {
+        console.log('I got here with help of tokens');
 
     }
 }

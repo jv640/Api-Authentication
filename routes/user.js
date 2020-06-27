@@ -1,5 +1,7 @@
 const express = require('express');
 const router = require('express-promise-router')();
+const passport = require('passport');
+const passportconfig = require('../passport');
 
 const UsersController = require('../controllers/user');
 const { validateBody, schemas } = require('../helpers/routehelpers');
@@ -13,7 +15,7 @@ router.route('/signin')
     .post(UsersController.signIn);
 
 router.route('/secret')
-    .get(UsersController.secret);
+    .get(passport.authenticate('jwt', { session: false }), UsersController.secret);
 
 
 module.exports = router;
