@@ -28,7 +28,7 @@ module.exports = {
         res.status(200).json({token});
     },
     signIn : async (req, res , next) => {
-
+        console.log('Succesfully loggen in!! ');
     },
     secret : async (req, res , next) => {
         console.log('I got here with help of tokens');

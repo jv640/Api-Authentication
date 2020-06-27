@@ -12,7 +12,7 @@ router.route('/signup')
 
 router.route('/signin')
     //Generate token
-    .post(UsersController.signIn);
+    .post( validateBody(schemas.authSchema) ,passport.authenticate('local', {session: false}), UsersController.signIn);
 
 router.route('/secret')
     .get(passport.authenticate('jwt', { session: false }), UsersController.secret);
