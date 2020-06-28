@@ -14,12 +14,17 @@ module.exports = {
     signUp : async (req, res , next) => {
         const { email, password } = req.value.body;
         // check if user already exist or not
-        const foundUser = await User.findOne({ email });
+        const foundUser = await User.findOne({ "local.email": email });
         if(foundUser){
             return res.status(403).json({ error : 'Email is already in use'});
         }
         
-        const newUser = new User({ email, password });
+        const newUser = new User({ 
+            method: 'local',
+            local:{
+                email, password
+            }
+        });
         await newUser.save();
 
         //Generating Token for user
@@ -33,8 +38,15 @@ module.exports = {
         res.status(200).json({ token });
         console.log('Succesfully loggen in!! ');
     },
+    googleOAuth : async (req, res , next) => {
+        //generate token
+        console.log(req.user);
+        const token = signToken(req.user);
+        res.status(200).json({ token });
+    },
+    
     secret : async (req, res , next) => {
-        console.log('I got here with help of tokens');
+        console.log('I got inside secret with help of tokens');
 
     }
 }
