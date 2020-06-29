@@ -2,10 +2,10 @@
   "name": "Api-Authentication",
   "version": "1.0.0",
   "description": "Learning to implement API Authentication",
-  "main": "app.js",
+  "main": "server/app.js",
   "scripts": {
-    "start": "node index",
-    "dev": "nodemon index"
+    "start": "node server-app",
+    "dev": "nodemon server-app"
   },
   "repository": {
     "type": "git",
