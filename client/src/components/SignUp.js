@@ -1,15 +1,24 @@
 import React, { Component } from 'react'
 import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { compose} from 'redux';
 
+import * as actions from '../action';
 import CustomInput from './CustomInput'; 
 
 class SignUp extends Component {
-
-    onSubmit(formData) {
-        console.log('OnSubmit got called');
-        console.log('form Data', formData)
+    constructor(props) {
+        super(props)
+        this.onSubmit = this.onSubmit.bind(this);
     }
     
+
+    async onSubmit(formData) {
+        console.log('OnSubmit got called');
+        console.log('form Data', formData)
+        await this.props.signUp(formData)
+    }
+
     render() {
         const { handleSubmit } = this.props; 
         return (
@@ -52,4 +61,7 @@ class SignUp extends Component {
     }
 }
 
-export default reduxForm({ form:'signup'})(SignUp)       
+export default compose(
+    connect(null, actions),
+    reduxForm({ form:'signup'})
+)(SignUp)       
