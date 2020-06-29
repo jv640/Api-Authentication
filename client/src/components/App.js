@@ -1,9 +1,11 @@
 import React from 'react';
+import Header from './Header';
 
-export default() => {
+export default(props) => {
     return(
         <div>
-            Is this working?
+            <Header />
+            { props.children }
         </div>
     );
 };
